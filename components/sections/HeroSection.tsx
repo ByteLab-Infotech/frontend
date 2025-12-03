@@ -59,14 +59,9 @@ export const HeroSection: React.FC = () => {
               variants={fadeIn}
               className="flex flex-wrap gap-4 mb-12"
             >
-              <Link href="/register">
+              <Link href="/internships">
                 <Button variant="cta" className="text-lg px-8 py-4">
-                  Start Your Free Application
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button variant="outline" className="text-lg px-8 py-4">
-                  Already Registered?
+                  Apply
                 </Button>
               </Link>
             </motion.div>

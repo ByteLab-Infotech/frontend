@@ -45,13 +45,9 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
             )}
           </motion.div>
         )}
-        <motion.div
-          initial="hidden"
-          animate={controls}
-          variants={fadeIn}
-        >
+        <div>
           {children}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -300,3 +300,4 @@ const DetailItem: React.FC<DetailItemProps> = ({ icon, label, value, highlight =
   );
 };
 
+

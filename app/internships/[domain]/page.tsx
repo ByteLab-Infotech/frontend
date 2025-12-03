@@ -601,12 +601,142 @@ export async function generateMetadata({ params }: DomainPageProps): Promise<Met
   });
 }
 
+// Helper function to generate basic domain data from slug
+function generateDomainFromSlug(slug: string): any {
+  // Generate slug from name to match domainNameToSlug function
+  const nameToSlug = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  
+  const nameMap: Record<string, string> = {
+    [nameToSlug('Web Development')]: 'Web Development',
+    [nameToSlug('Data Science')]: 'Data Science',
+    [nameToSlug('Mobile Development')]: 'Mobile Development',
+    [nameToSlug('Cloud Computing')]: 'Cloud Computing',
+    [nameToSlug('Cybersecurity')]: 'Cybersecurity',
+    [nameToSlug('Frontend Developer')]: 'Frontend Developer',
+    [nameToSlug('Backend Developer')]: 'Backend Developer',
+    [nameToSlug('Full Stack Developer')]: 'Full Stack Developer',
+    [nameToSlug('App Developer')]: 'App Developer',
+    [nameToSlug('Python Programming')]: 'Python Programming',
+    [nameToSlug('Java Programming')]: 'Java Programming',
+    [nameToSlug('C++ Programming')]: 'C++ Programming',
+    [nameToSlug('C Programming')]: 'C Programming',
+    [nameToSlug('DevOps')]: 'DevOps',
+    [nameToSlug('AI')]: 'AI',
+    [nameToSlug('Data Analytics')]: 'Data Analytics',
+    [nameToSlug('Bioinformatics')]: 'Bioinformatics',
+    [nameToSlug('Digital Marketing')]: 'Digital Marketing',
+    [nameToSlug('Business Strategy')]: 'Business Strategy',
+    [nameToSlug('Finance & Investment')]: 'Finance & Investment',
+    [nameToSlug('HR')]: 'HR',
+    [nameToSlug('Stock Market Trading')]: 'Stock Market Trading',
+    [nameToSlug('Content Writing')]: 'Content Writing',
+    [nameToSlug('UI/UX')]: 'UI/UX',
+    [nameToSlug('Graphics Automation')]: 'Graphics Automation',
+  };
+
+  const descriptionMap: Record<string, string> = {
+    [nameToSlug('Web Development')]: 'Master modern web technologies and build real-world web applications.',
+    [nameToSlug('Data Science')]: 'Transform raw data into actionable business insights through advanced analytics, machine learning, and statistical modeling.',
+    [nameToSlug('Mobile Development')]: 'Build native and cross-platform mobile applications for iOS and Android platforms.',
+    [nameToSlug('Cloud Computing')]: 'Master cloud infrastructure, services, and deployment strategies on leading platforms like AWS, Azure, and GCP.',
+    [nameToSlug('Cybersecurity')]: 'Protect digital assets and infrastructure from evolving cyber threats through comprehensive security practices.',
+    [nameToSlug('Frontend Developer')]: 'Specialize in creating engaging, responsive user interfaces using modern frontend technologies.',
+    [nameToSlug('Backend Developer')]: 'Build robust, scalable server-side applications and APIs that power modern web and mobile platforms.',
+    [nameToSlug('Full Stack Developer')]: 'Become proficient in both frontend and backend development to build complete, end-to-end web applications.',
+    [nameToSlug('App Developer')]: 'Develop native and cross-platform mobile applications for iOS, Android, and hybrid platforms.',
+    [nameToSlug('Python Programming')]: 'Master Python, one of the most versatile and in-demand programming languages.',
+    [nameToSlug('Java Programming')]: 'Develop enterprise-grade applications using Java, the cornerstone of enterprise software development.',
+    [nameToSlug('C++ Programming')]: 'Master C++ for high-performance system programming, game development, and resource-intensive applications.',
+    [nameToSlug('C Programming')]: 'Learn the fundamentals of programming with C, the foundation of modern computing.',
+    [nameToSlug('DevOps')]: 'Bridge the gap between development and operations through automation, continuous integration, and infrastructure as code.',
+    [nameToSlug('AI')]: 'Explore artificial intelligence and machine learning to build intelligent systems that learn and adapt.',
+    [nameToSlug('Data Analytics')]: 'Transform business data into strategic insights through statistical analysis, data visualization, and business intelligence.',
+    [nameToSlug('Bioinformatics')]: 'Combine biology, computer science, and data analysis to solve complex biological problems.',
+    [nameToSlug('Digital Marketing')]: 'Master the art of promoting products and services through digital channels.',
+    [nameToSlug('Business Strategy')]: 'Develop strategic thinking and business acumen to drive organizational growth and competitive advantage.',
+    [nameToSlug('Finance & Investment')]: 'Gain expertise in financial analysis, investment strategies, portfolio management, and risk assessment.',
+    [nameToSlug('HR')]: 'Master human resources management, talent acquisition, employee relations, performance management, and organizational development.',
+    [nameToSlug('Stock Market Trading')]: 'Learn technical and fundamental analysis, trading strategies, risk management, and market psychology.',
+    [nameToSlug('Content Writing')]: 'Develop professional writing skills for digital platforms, marketing, and communication.',
+    [nameToSlug('UI/UX')]: 'Design intuitive, user-centered digital experiences through user research, wireframing, prototyping, and usability testing.',
+    [nameToSlug('Graphics Automation')]: 'Automate graphic design workflows and create dynamic visual content using programming and automation tools.',
+  };
+
+  const name = nameMap[slug] || slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  const description = descriptionMap[slug] || `Explore ${name} and gain hands-on experience with real-world projects.`;
+
+  return {
+    name,
+    description,
+    icon: '💼',
+    skills: [
+      'Industry-standard tools and technologies',
+      'Real-world project experience',
+      'Best practices and methodologies',
+      'Portfolio development',
+    ],
+    tools: [
+      'Modern development tools',
+      'Industry-standard frameworks',
+      'Version control systems',
+      'Collaboration platforms',
+    ],
+    tasks: {
+      beginner: [
+        'Foundation projects',
+        'Basic concepts and tools',
+        'Initial portfolio pieces',
+      ],
+      intermediate: [
+        'Intermediate-level projects',
+        'Advanced concepts',
+        'Real-world applications',
+      ],
+      advanced: [
+        'Complex projects',
+        'Advanced techniques',
+        'Production-ready solutions',
+      ],
+      final: [
+        'Capstone project',
+        'Portfolio showcase',
+      ],
+    },
+    exampleProjects: [
+      'Real-world application',
+      'Portfolio project',
+      'Industry-standard solution',
+    ],
+    whyChoose: [
+      'Industry-standard technologies',
+      'Real-world projects',
+      'Comprehensive learning path',
+      'Verified certificate',
+    ],
+    faqs: [
+      {
+        q: 'Do I need prior experience?',
+        a: 'No prior experience required. Our program starts from the basics and progresses to advanced topics.',
+      },
+      {
+        q: 'What will I learn?',
+        a: `You'll learn ${name.toLowerCase()} fundamentals and advanced concepts through hands-on projects.`,
+      },
+      {
+        q: 'Will I get a certificate?',
+        a: 'Yes, upon successful completion of all tasks, you\'ll receive a verified certificate with QR code.',
+      },
+    ],
+  };
+}
+
 export default async function DomainPage({ params }: DomainPageProps) {
   const { domain: domainSlug } = await params;
-  const domain = domainData[domainSlug];
+  let domain = domainData[domainSlug];
   
+  // If domain not found in domainData, generate basic data from slug
   if (!domain) {
-    notFound();
+    domain = generateDomainFromSlug(domainSlug);
   }
 
   return <DomainPageContent domain={domain} domainSlug={domainSlug} />;
