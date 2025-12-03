@@ -26,7 +26,7 @@ interface AnimatedTaskCardProps {
   taskNumber: number;
 }
 
-export const AnimatedTaskCard: React.FC<AnimatedTaskCardProps> = ({ task, taskNumber }) => {
+export const AnimatedTaskCard: React.FC<AnimatedTaskCardProps> = React.memo(({ task, taskNumber }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   
   const getStatusIcon = () => {
@@ -154,5 +154,5 @@ export const AnimatedTaskCard: React.FC<AnimatedTaskCardProps> = ({ task, taskNu
       </AnimatePresence>
     </motion.div>
   );
-};
+});
 

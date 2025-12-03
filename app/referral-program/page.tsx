@@ -1,17 +1,11 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/components/seo/Metadata';
+'use client';
+
 import { Navigation } from '@/components/Navigation';
 import { ContentSection } from '@/components/content/ContentSection';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { Share2, Gift, Users, TrendingUp, CheckCircle2, HelpCircle } from 'lucide-react';
 
-export const metadata = generateMetadata({
-  title: 'Referral Program - Earn Rewards',
-  description: 'Join ByteLab\'s referral program. Refer friends and earn rewards. Learn about referral rules, rewards structure, and how to get started.',
-  keywords: ['referral program', 'earn rewards', 'refer friends', 'student referral'],
-  canonical: 'https://bytelab.com/referral-program',
-});
 
 export default function ReferralProgramPage() {
   return (

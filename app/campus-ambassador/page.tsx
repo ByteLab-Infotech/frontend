@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/components/seo/Metadata';
+'use client';
+
 import { Navigation } from '@/components/Navigation';
 import { ContentSection } from '@/components/content/ContentSection';
 import { Card } from '@/components/ui/Card';
@@ -8,13 +8,6 @@ import { Input } from '@/components/ui/Input';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { Users, Award, TrendingUp, Gift, CheckCircle2, Send } from 'lucide-react';
-
-export const metadata = generateMetadata({
-  title: 'Campus Ambassador Program - Join ByteLab',
-  description: 'Become a ByteLab Campus Ambassador. Represent ByteLab on your campus, help fellow students, and earn rewards. Apply now for the CA program.',
-  keywords: ['campus ambassador', 'CA program', 'student ambassador', 'referral program'],
-  canonical: 'https://bytelab.com/campus-ambassador',
-});
 
 export default function CampusAmbassadorPage() {
   return (

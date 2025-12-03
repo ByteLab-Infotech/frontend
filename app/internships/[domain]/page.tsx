@@ -6,15 +6,15 @@ import { ContentSection } from '@/components/content/ContentSection';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
-import { fadeIn, slideUp } from '@/lib/animations';
+import { fadeIn, slideUp, staggerContainer } from '@/lib/animations';
 import { CheckCircle2, Clock, Award, Code, BookOpen, Target } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface DomainPageProps {
-  params: {
+  params: Promise<{
     domain: string;
-  };
+  }>;
 }
 
 const domainData: Record<string, any> = {
@@ -581,7 +581,8 @@ const domainData: Record<string, any> = {
 };
 
 export async function generateMetadata({ params }: DomainPageProps): Promise<Metadata> {
-  const domain = domainData[params.domain];
+  const { domain: domainSlug } = await params;
+  const domain = domainData[domainSlug];
   if (!domain) {
     return createMetadata({
       title: 'Domain Not Found',
@@ -598,12 +599,13 @@ export async function generateMetadata({ params }: DomainPageProps): Promise<Met
       `${domain.name.toLowerCase()} certificate`,
       `learn ${domain.name.toLowerCase()}`,
     ],
-    canonical: `https://bytelab.com/internships/${params.domain}`,
+    canonical: `https://bytelab.com/internships/${domainSlug}`,
   });
 }
 
-export default function DomainPage({ params }: DomainPageProps) {
-  const domain = domainData[params.domain];
+export default async function DomainPage({ params }: DomainPageProps) {
+  const { domain: domainSlug } = await params;
+  const domain = domainData[domainSlug];
   
   if (!domain) {
     notFound();
@@ -618,7 +620,7 @@ export default function DomainPage({ params }: DomainPageProps) {
           description: domain.description,
           datePublished: new Date().toISOString(),
           dateModified: new Date().toISOString(),
-          image: `https://bytelab.com/internships/${params.domain}.jpg`,
+          image: `https://bytelab.com/internships/${domainSlug}.jpg`,
         }}
       />
       

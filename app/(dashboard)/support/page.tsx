@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sidebar } from '@/components/ui/Sidebar';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -25,6 +25,18 @@ export default function SupportPage() {
     { key: 'support', label: 'Support', href: '/dashboard/support' },
   ];
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      const initialize = useAuthStore.getState().initialize;
+      await initialize();
+      const currentUser = useAuthStore.getState().user;
+      if (!currentUser) {
+        router.push('/login');
+      }
+    };
+    checkAuth();
+  }, [router]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -36,7 +48,6 @@ export default function SupportPage() {
   };
 
   if (!user) {
-    router.push('/login');
     return null;
   }
 

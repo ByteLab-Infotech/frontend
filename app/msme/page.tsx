@@ -1,18 +1,15 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/components/seo/Metadata';
+'use client';
+
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup';
 import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { ContentSection } from '@/components/content/ContentSection';
 import { PageHero } from '@/components/sections/PageHero';
 import { AnimatedSection } from '@/components/sections/AnimatedSection';
+import { motion } from 'framer-motion';
+import { slideUp } from '@/lib/animations';
 import { Shield, FileText, CheckCircle2, Building2 } from 'lucide-react';
 
-export const metadata = generateMetadata({
-  title: 'MSME Registration - ByteLab Infotech',
-  description: 'ByteLab Infotech is an MSME registered company verified by the Government of India. View our MSME certificate and registration details.',
-  keywords: ['MSME registered', 'MSME certificate', 'MSME India', 'verified company'],
-  canonical: 'https://bytelab.com/msme',
-});
 
 export default function MSMEPage() {
   return (
@@ -74,7 +71,7 @@ export default function MSMEPage() {
                   for a copy of the certificate.
                 </p>
               </div>
-            </motion.div>
+            </AnimatedSection>
           </div>
         </ContentSection>
 
@@ -119,7 +116,7 @@ export default function MSMEPage() {
                   </div>
                 </div>
               </div>
-            </AnimatedSection>
+            </motion.div>
           </div>
         </ContentSection>
 
@@ -193,6 +190,8 @@ export default function MSMEPage() {
             </AnimatedSection>
           </div>
         </ContentSection>
+
+        <Footer />
       </div>
     </>
   );

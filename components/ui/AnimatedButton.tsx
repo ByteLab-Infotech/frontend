@@ -2,11 +2,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from './Button';
+import { Button, ButtonProps } from './Button';
 
-interface AnimatedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'cta';
-  children: React.ReactNode;
+interface AnimatedButtonProps extends Omit<ButtonProps, 'className'> {
+  className?: string;
   href?: string;
 }
 

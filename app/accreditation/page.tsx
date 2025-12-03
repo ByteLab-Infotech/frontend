@@ -1,31 +1,16 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/components/seo/Metadata';
+'use client';
+
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup';
 import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { ContentSection } from '@/components/content/ContentSection';
 import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { Award, Shield, CheckCircle2, FileCheck, Lock } from 'lucide-react';
 
-export const metadata = generateMetadata({
-  title: 'Accreditation & Credibility - ByteLab Infotech',
-  description: 'Learn about ByteLab Infotech\'s accreditation, MSME verification, certificate validation technologies, and process credibility.',
-  keywords: ['accreditation', 'credibility', 'MSME verified', 'certificate validation', 'trust'],
-  canonical: 'https://bytelab.com/accreditation',
-});
-
 export default function AccreditationPage() {
   return (
-    <>
-      <SchemaMarkup
-        type="organization"
-        data={{
-          description: 'ByteLab Infotech - Accredited virtual internship platform with MSME verification.',
-          socialLinks: [],
-        }}
-      />
-      
-      <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
         <Navigation />
         
         {/* Hero Section */}
@@ -316,8 +301,9 @@ export default function AccreditationPage() {
             </motion.div>
           </div>
         </ContentSection>
+
+        <Footer />
       </div>
-    </>
   );
 }
 

@@ -55,8 +55,8 @@ export const Footer: React.FC = () => {
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: 'https://linkedin.com/company/bytelab', label: 'LinkedIn' },
-    { icon: Github, href: 'https://github.com/bytelab', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/bytelab-infotech', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/bytelab-infotech', label: 'GitHub' },
     { icon: Twitter, href: 'https://twitter.com/bytelab', label: 'Twitter' },
   ];
 
@@ -79,6 +79,16 @@ export const Footer: React.FC = () => {
               MSME verified virtual internship platform. Build real-world skills with GitHub-based projects 
               and earn verified certificates recognized by employers.
             </p>
+            <div className="mb-6">
+              <a 
+                href="https://bytelab.com" 
+                className="text-sky-blue/90 hover:text-white transition-colors text-body-sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                www.bytelab.com
+              </a>
+            </div>
             
             {/* Contact Info */}
             <div className="space-y-3 mb-6">

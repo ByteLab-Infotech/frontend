@@ -18,6 +18,8 @@ interface SidebarProps {
   onItemClick?: (key: string) => void;
   collapsed?: boolean;
   onCollapseChange?: (collapsed: boolean) => void;
+  mobileOpen?: boolean;
+  onMobileToggle?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ 
@@ -25,12 +27,19 @@ export const Sidebar: React.FC<SidebarProps> = ({
   activeKey, 
   onItemClick,
   collapsed: controlledCollapsed,
-  onCollapseChange
+  onCollapseChange,
+  mobileOpen: controlledMobileOpen,
+  onMobileToggle
 }) => {
   const [internalCollapsed, setInternalCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [internalMobileOpen, setInternalMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  const mobileOpen = controlledMobileOpen !== undefined ? controlledMobileOpen : internalMobileOpen;
+  const setMobileOpen = onMobileToggle ? 
+    (() => { onMobileToggle(); }) : 
+    setInternalMobileOpen;
 
   const collapsed = controlledCollapsed !== undefined ? controlledCollapsed : internalCollapsed;
   const setCollapsed = onCollapseChange || setInternalCollapsed;
@@ -56,7 +65,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
       onItemClick?.(item.key);
     }
     if (isMobile) {
-      setMobileOpen(false);
+      if (onMobileToggle) {
+        onMobileToggle();
+      } else {
+        setInternalMobileOpen(false);
+      }
     }
   };
 
@@ -65,11 +78,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
       initial="hidden"
       animate="visible"
       variants={fadeIn}
+      id="dashboard-sidebar"
       className={`
         bg-navy min-h-screen p-6 transition-all duration-300
         ${collapsed ? 'w-20' : 'w-64'}
         ${isMobile ? 'fixed left-0 top-0 z-50 shadow-2xl' : ''}
       `}
+      role="navigation"
+      aria-label="Dashboard sidebar"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
@@ -108,7 +124,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setMobileOpen(false)}
+            onClick={() => {
+              if (onMobileToggle) {
+                onMobileToggle();
+              } else {
+                setInternalMobileOpen(false);
+              }
+            }}
             className="p-2 rounded-lg hover:bg-[#1a3a5e] text-white transition-colors"
             aria-label="Close menu"
           >
@@ -118,7 +140,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       {/* Navigation */}
-      <nav className="space-y-2">
+      <nav className="space-y-2" role="menu" aria-label="Dashboard navigation">
         {items.map((item, index) => {
           const isActive = activeKey === item.key;
           return (
@@ -139,6 +161,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 }
               `}
               title={collapsed ? item.label : undefined}
+              aria-label={item.label}
+              aria-current={isActive ? 'page' : undefined}
+              role="menuitem"
             >
               {item.icon && (
                 <span className={collapsed ? '' : 'mr-3'}>
@@ -176,22 +201,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <>
-      {/* Mobile menu button */}
-      {isMobile && (
-        <motion.button
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setMobileOpen(true)}
-          className="fixed top-4 left-4 z-40 p-3 bg-navy text-white rounded-lg shadow-lg md:hidden"
-          aria-label="Open menu"
-        >
-          <Menu className="w-6 h-6" />
-        </motion.button>
-      )}
-
-      {/* Mobile overlay */}
+      {/* Mobile overlay and sidebar */}
       <AnimatePresence>
         {isMobile && mobileOpen && (
           <>
@@ -199,8 +209,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                if (onMobileToggle) {
+                  onMobileToggle();
+                } else {
+                  setInternalMobileOpen(false);
+                }
+              }}
               className="fixed inset-0 bg-black/50 z-40 md:hidden"
+              aria-hidden="true"
             />
             <motion.div
               initial={{ x: -300 }}

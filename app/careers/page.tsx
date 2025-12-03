@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { generateMetadata } from '@/components/seo/Metadata';
 import { Navigation } from '@/components/Navigation';
+import { Footer } from '@/components/Footer';
 import { ContentSection } from '@/components/content/ContentSection';
 import { PageHero } from '@/components/sections/PageHero';
 import { AnimatedSection } from '@/components/sections/AnimatedSection';
@@ -227,6 +228,8 @@ export default function CareersPage() {
           </div>
         </div>
       </ContentSection>
+
+      <Footer />
     </div>
   );
 }

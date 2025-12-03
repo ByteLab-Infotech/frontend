@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Sidebar } from '@/components/ui/Sidebar';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -12,6 +12,18 @@ import Link from 'next/link';
 export default function ResourcesPage() {
   const router = useRouter();
   const { user, logout } = useAuthStore();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const initialize = useAuthStore.getState().initialize;
+      await initialize();
+      const currentUser = useAuthStore.getState().user;
+      if (!currentUser) {
+        router.push('/login');
+      }
+    };
+    checkAuth();
+  }, [router]);
 
   const sidebarItems = [
     { key: 'dashboard', label: 'Dashboard', href: '/student' },
@@ -50,7 +62,6 @@ export default function ResourcesPage() {
   ];
 
   if (!user) {
-    router.push('/login');
     return null;
   }
 

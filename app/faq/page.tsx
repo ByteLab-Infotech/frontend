@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/components/seo/Metadata';
+'use client';
+
 import { SchemaMarkup } from '@/components/seo/SchemaMarkup';
 import { Navigation } from '@/components/Navigation';
 import { ContentSection } from '@/components/content/ContentSection';
@@ -8,12 +8,6 @@ import { motion } from 'framer-motion';
 import { fadeIn } from '@/lib/animations';
 import { HelpCircle } from 'lucide-react';
 
-export const metadata = generateMetadata({
-  title: 'Frequently Asked Questions - FAQ',
-  description: 'Find answers to common questions about ByteLab virtual internships, certificate verification, payment, batch system, GitHub process, and more.',
-  keywords: ['FAQ', 'internship questions', 'certificate FAQ', 'virtual internship help'],
-  canonical: 'https://bytelab.com/faq',
-});
 
 const faqCategories = [
   {

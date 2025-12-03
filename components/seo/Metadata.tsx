@@ -9,7 +9,7 @@ interface MetadataProps {
   noindex?: boolean;
 }
 
-export function generateMetadata({
+export function createMetadata({
   title,
   description,
   keywords = [],
@@ -31,18 +31,23 @@ export function generateMetadata({
     ...keywords,
   ];
 
-  return {
+  const keywordsString = defaultKeywords.join(', ');
+  const canonicalUrl = canonical || 'https://bytelab.com';
+  const robotsValue = noindex ? 'noindex, nofollow' : 'index, follow';
+  
+  // Create plain object literal to ensure full serializability
+  // Note: 'keywords' is not a standard Next.js Metadata field, so we omit it
+  const metadata: Metadata = {
     title: fullTitle,
-    description,
-    keywords: defaultKeywords.join(', '),
+    description: description,
     authors: [{ name: 'ByteLab Infotech' }],
     creator: 'ByteLab Infotech',
     publisher: 'ByteLab Infotech',
-    robots: noindex ? 'noindex, nofollow' : 'index, follow',
+    robots: robotsValue,
     openGraph: {
       title: fullTitle,
-      description,
-      url: canonical || 'https://bytelab.com',
+      description: description,
+      url: canonicalUrl,
       siteName: 'ByteLab Infotech',
       images: ogImage ? [{ url: ogImage }] : [],
       locale: 'en_US',
@@ -51,12 +56,17 @@ export function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: fullTitle,
-      description,
+      description: description,
       images: ogImage ? [ogImage] : [],
     },
     alternates: {
-      canonical: canonical || 'https://bytelab.com',
+      canonical: canonicalUrl,
     },
   };
+
+  return metadata;
 }
+
+// Keep generateMetadata as an alias for backward compatibility
+export const generateMetadata = createMetadata;
 

@@ -1,5 +1,5 @@
-import { Metadata } from 'next';
-import { generateMetadata } from '@/components/seo/Metadata';
+'use client';
+
 import { Navigation } from '@/components/Navigation';
 import { ContentSection } from '@/components/content/ContentSection';
 import { Card } from '@/components/ui/Card';
@@ -8,12 +8,6 @@ import { motion } from 'framer-motion';
 import { fadeIn, slideUp } from '@/lib/animations';
 import { FileText, Download, CheckCircle2 } from 'lucide-react';
 
-export const metadata = generateMetadata({
-  title: 'Offer Letter Sample - View Sample Offer Letter',
-  description: 'View a sample ByteLab Infotech offer letter. See what your official internship offer letter will look like with all key features highlighted.',
-  keywords: ['offer letter sample', 'internship offer letter', 'sample offer letter'],
-  canonical: 'https://bytelab.com/offer-letter-sample',
-});
 
 export default function OfferLetterSamplePage() {
   return (
