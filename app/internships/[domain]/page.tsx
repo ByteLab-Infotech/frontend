@@ -580,6 +580,12 @@ const domainData: Record<string, any> = {
   },
 };
 
+export function generateStaticParams() {
+  return Object.keys(domainData).map((domain) => ({
+    domain,
+  }));
+}
+
 export async function generateMetadata({ params }: DomainPageProps): Promise<Metadata> {
   const { domain: domainSlug } = await params;
   const domain = domainData[domainSlug];
